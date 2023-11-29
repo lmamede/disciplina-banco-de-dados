@@ -1,0 +1,26 @@
+doctype html
+
+html
+    head 
+        title= title
+        link(rel= 'stylesheet', href='/stylesheets/style.css')
+        link(rel= 'stylesheet', href='/stylesheets/home.css')
+    body 
+        block content
+
+    
+block content 
+
+    .homepage
+        .nba-logo-image-container
+            img(src='/images/logos/nba_logo.png' alt='NBA Logo')
+
+            .home-button-container
+                button.button(class='home-button') Home
+                button.button(class='home-button') Teams
+                button.button(class='home-button') Seasons
+                button.button(class='home-button') Arenas
+                button.button(class='home-button') Games
+        
+        h1= "NBA Season Stats"
+        p From 2000 to 2020

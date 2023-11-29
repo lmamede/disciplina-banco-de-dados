@@ -1,0 +1,29 @@
+
+.homepage {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 400px;
+    width: 1250px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.nba-logo-image-container {
+    display: flex;
+    align-items: center;
+  }
+  
+.home-button-container {
+    display: flex;
+    margin-left: 200px;
+}
+
+.home-button {
+    border: 1px solid #ccc;
+    border-radius: 0;
+    width: 100px;
+    height: 50px;
+    margin-bottom: -1px;
+}
