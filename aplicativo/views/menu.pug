@@ -1,0 +1,30 @@
+doctype html
+
+html
+    head 
+        title= title
+        link(rel= 'stylesheet', href='/stylesheets/style.css')
+        link(rel= 'stylesheet', href='/stylesheets/menu.css')
+        block styling
+    body
+        .page
+            block heading
+            block content 
+            block footing
+
+block heading 
+
+    .homepage
+        .nba-logo-image-container
+            img(src='/images/logos/nba_logo.png' alt='NBA Logo')
+
+            .home-button-container
+                button.button(class='home-button') Home
+                button.button(class='home-button') Teams
+                button.button(class='home-button') Seasons
+                button.button(class='home-button') Arenas
+                button.button(class='home-button') Games
+        
+        .page-title-container
+            h1(class='page-title')= page_title
+            p(class='page-subtitle')= page_subtitle
