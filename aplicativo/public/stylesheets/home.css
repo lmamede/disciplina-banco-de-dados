@@ -3,11 +3,14 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    height: 400px;
-    width: 1250px;
-    margin: 0;
+    background-color: lightgray;
+    height: 600px;
+    width: 100%;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 3%;
 }
 
 .nba-logo-image-container {
@@ -17,13 +20,33 @@
   
 .home-button-container {
     display: flex;
-    margin-left: 200px;
+    margin-left: 35%;
 }
 
 .home-button {
     border: 1px solid #ccc;
     border-radius: 0;
-    width: 100px;
-    height: 50px;
+    width: 160px;
+    height: 60px;
     margin-bottom: -1px;
+    font-size: 20px;
+}
+
+.page-title-container {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    font-size: 500%;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    font-size: 300%;
+    margin-top: 0;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.659);
 }
