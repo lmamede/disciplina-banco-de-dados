@@ -8,10 +8,5 @@ import lombok.Setter;
 @Setter
 public class Arena {
     private int capacity;
-    private String owner;
-
-    public Arena(int capacity, String owner) {
-        this.capacity = capacity;
-        this.owner = owner;
-    }
+    private String name;
 }
