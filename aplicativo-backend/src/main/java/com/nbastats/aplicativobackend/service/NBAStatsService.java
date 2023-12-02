@@ -30,7 +30,7 @@ public class NBAStatsService {
         return nbaStatsRepository.getSeasons();
     }
 
-    public List<Arena> fetchTeams() {
+    public List<TeamDTO> fetchTeams() throws IOException {
         return nbaStatsRepository.getTeams();
     }
 
@@ -60,5 +60,13 @@ public class NBAStatsService {
 
     public List<SeasonVictoriesDTO> fetchSeasonWinStats(int season) throws IOException {
         return nbaStatsRepository.getSeasonWinStats(season);
+    }
+
+    public List<TeamProfileDTO> fetchTeamProfile(String teamNickname) throws IOException {
+        return nbaStatsRepository.getTeamProfile(teamNickname);
+    }
+
+    public List<TeamAdversaryDTO> fetchTeamAdversaryStats(String teamNickname) throws IOException {
+        return nbaStatsRepository.getTeamAdversaryStats(teamNickname);
     }
 }

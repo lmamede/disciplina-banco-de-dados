@@ -2,6 +2,7 @@ package com.nbastats.aplicativobackend.controller;
 
 import com.nbastats.aplicativobackend.model.dto.*;
 import com.nbastats.aplicativobackend.model.entities.Arena;
+import com.nbastats.aplicativobackend.model.entities.TeamStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.nbastats.aplicativobackend.service.NBAStatsService;
@@ -75,9 +76,17 @@ public class NBAStatsController {
     }
 
     @GetMapping(path = "/teams")
-    public List<Arena> fetchTeams()
-    {
+    public List<TeamDTO> fetchTeams() throws IOException {
         return nbaStatsService.fetchTeams();
     }
 
+    @GetMapping(path = "/teams/profile/{team_nickname}/statistics/adversaries")
+    public List<TeamAdversaryDTO> fetchTeamAdversaryStats(@PathVariable String team_nickname) throws IOException {
+        return nbaStatsService.fetchTeamAdversaryStats(team_nickname);
+    }
+
+    @GetMapping(path = "/teams/profile/{team_nickname}")
+    public List<TeamProfileDTO> fetchTeamProfile(@PathVariable String team_nickname) throws IOException {
+        return nbaStatsService.fetchTeamProfile(team_nickname);
+    }
 }

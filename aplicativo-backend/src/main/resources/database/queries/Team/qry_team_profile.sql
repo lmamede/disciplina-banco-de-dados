@@ -1,41 +1,44 @@
 -- Mostrar Team Profile e porcentagens ao lado
 SELECT
-    Team,
+    TeamNickname,
     Foundation_Year,
-    Total_Winning_Games,
-    Total_Loosing_Games,
-    Total_Games_Played,
-    Percentage_Total_Wins,
-    Percentage_Home_Wins,
-    Team_ID
+    TotalWinningGames,
+    TotalLoosingGames,
+    TotalGamesPlayed,
+    TotalWinsPercentage,
+    HomeWinsPercentage,
+    TeamID
 FROM (
          SELECT
-             Nickname as Team,
-             Foundation_Year,
-             sum(Winning_Games) AS Total_Winning_Games,
-             sum(Loosing_Games) AS Total_Loosing_Games,
-             sum(Games_Played) AS Total_Games_Played,
-             CONCAT(FORMAT(sum(Winning_Games) / sum(Games_Played) * 100,1), '%') AS Percentage_Total_Wins,
-             Team_ID
+             t.Nickname as TeamNickname,
+             t.Foundation_Year,
+             sum(WinningGames) AS TotalWinningGames,
+             sum(LoosingGames) AS TotalLoosingGames,
+             sum(GamesPlayed) AS TotalGamesPlayed,
+             CONCAT(FORMAT(sum(WinningGames) / sum(GamesPlayed) * 100,1), '%') AS TotalWinsPercentage,
+             TeamID
          FROM (
                   SELECT
-                      Season_ID,
-                      max(Winning_Games) AS Winning_Games,
-                      max(Loosing_Games) AS Loosing_Games,
-                      max(Games_Played) AS Games_Played,
-                      fk_Team_ID AS Team_ID
-                  FROM SeasonStatistics
-                  GROUP BY Season_ID, fk_TEAM_ID
+                      ss.Season_ID,
+                      max(ss.Winning_Games) AS WinningGames,
+                      max(ss.Loosing_Games) AS LoosingGames,
+                      max(ss.Games_Played) AS GamesPlayed,
+                      ss.fk_Team_ID AS TeamID
+                  FROM SeasonStatistics AS ss
+                  GROUP BY ss.Season_ID, ss.fk_TEAM_ID
               ) AS Victories_By_Season
-                  INNER JOIN Team ON Team_ID = ID
-         GROUP BY Team_ID HAVING Team = :nickname
+                  INNER JOIN Team t ON t.ID = TeamID
+         WHERE t.Nickname = :team_nickname
+         GROUP BY TeamID
      ) as tbl1
          NATURAL JOIN (
-    SELECT
-        Team.Nickname as Team,
-        CONCAT(FORMAT(avg(Win) * 100,1), '%') as Percentage_Home_Wins,
-        Team.ID as Team_ID
-    FROM Team
-             INNER JOIN Game ON Team.ID = fk_Team_ID_Home
-    GROUP BY Team.ID HAVING TEAM = :nickname
+            SELECT
+                t1.Nickname as TeamNickname,
+                CONCAT(FORMAT(avg(Win) * 100,1), '%') as HomeWinsPercentage,
+                t1.ID as Team_ID
+    FROM Team AS t1
+             INNER JOIN Game ON t1.ID = fk_Team_ID_Home
+    WHERE t1.Nickname = :team_nickname
+    GROUP BY t1.ID
 ) as tbl2;
+
