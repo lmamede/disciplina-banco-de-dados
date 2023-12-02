@@ -1,0 +1,10 @@
+.page-content-container{
+    display: center;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 800px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 20px;
+    overflow-x: hidden;
+}
