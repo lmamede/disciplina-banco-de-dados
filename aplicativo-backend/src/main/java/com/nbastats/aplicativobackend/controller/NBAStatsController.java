@@ -1,10 +1,7 @@
 package com.nbastats.aplicativobackend.controller;
 
-import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
-import com.nbastats.aplicativobackend.model.dto.GameDTO;
-import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
+import com.nbastats.aplicativobackend.model.dto.*;
 import com.nbastats.aplicativobackend.model.entities.Arena;
-import com.nbastats.aplicativobackend.model.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.nbastats.aplicativobackend.service.NBAStatsService;
@@ -48,8 +45,13 @@ public class NBAStatsController {
     }
 
     @PostMapping(path = "/players")
-    public List<Player> fetchPlayers(@RequestBody Map<String, String> data) throws IOException {
-        return nbaStatsService.SeasonPlayers(Integer.parseInt(data.get("season")),data.get("team_nickname"));
+    public List<PlayerDTO> fetchSeasonPlayers(@RequestBody Map<String, String> data) throws IOException {
+        return nbaStatsService.fetchSeasonPlayers(Integer.parseInt(data.get("season")),data.get("team_nickname"));
+    }
+
+    @GetMapping(path = "/players/profile/{player_name}")
+    public List<PlayerProfileDTO> fetchSeasonPlayers(@PathVariable String player_name) throws IOException {
+        return nbaStatsService.fetchPlayerProfile(player_name);
     }
 
     @GetMapping(path = "/seasons")

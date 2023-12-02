@@ -1,11 +1,8 @@
 package com.nbastats.aplicativobackend.repository;
 
 import com.google.common.io.Resources;
-import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
-import com.nbastats.aplicativobackend.model.dto.GameDTO;
-import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
+import com.nbastats.aplicativobackend.model.dto.*;
 import com.nbastats.aplicativobackend.model.entities.Arena;
-import com.nbastats.aplicativobackend.model.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -42,11 +39,11 @@ public class NBAStatsRepository {
         return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", team_nickname),BeanPropertyRowMapper.newInstance(GameDTO.class)).toList();
     }
 
-    public List<Player> getSeasonPlayers(int season, String teamNickname) throws IOException {
+    public List<PlayerDTO> getSeasonPlayers(int season, String teamNickname) throws IOException {
         URL path = Resources.getResource(PLAYER_QUERIES_PATH+"qry_players_by_season_game.sql");
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
-        return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(Player.class)).toList();
+        return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(PlayerDTO.class)).toList();
     }
 
     public List<Arena> getSeasons() {
@@ -83,5 +80,12 @@ public class NBAStatsRepository {
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
         return jdbcTemplate.queryForStream(sql, Map.of("team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(GameDTO.class)).toList();
+    }
+
+    public List<PlayerProfileDTO> getPlayerProfile(String playerName) throws IOException {
+        URL path = Resources.getResource(PLAYER_QUERIES_PATH+"qry_player_profile.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("player_name", playerName),BeanPropertyRowMapper.newInstance(PlayerProfileDTO.class)).toList();
     }
 }

@@ -1,7 +1,10 @@
 -- Mostrar dados do jogador selecionado:
-SELECT Name, IFNULL(Nickname, '-') as Nickname, FORMAT(Seconds_Played/60, 0) as Total_Minutes_Played
-FROM Player
-WHERE Name = :player_name;
+SELECT
+    p.Name,
+    IFNULL(p.Nickname, '-') as Nickname,
+    FORMAT(p.Seconds_Played/60, 0) as MinutesPlayed
+FROM Player as p
+WHERE p.Name = :player_name;
 
 
 

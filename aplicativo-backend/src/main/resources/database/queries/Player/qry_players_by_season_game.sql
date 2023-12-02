@@ -1,14 +1,6 @@
 -- Mostrar jogadores que, na season desse jogo, fizeram parte desse time:
 SELECT
-    p.ID,
-    p.Name,
-    (
-        CASE WHEN p.Nickname is NULL
-            THEN '-'
-            ELSE p.Nickname
-        END
-    ) as nickname,
-    p.Seconds_Played as secondsPlayed
+    p.Name
 FROM Player AS p
 WHERE p.ID in
     (
