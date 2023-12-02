@@ -1,21 +1,26 @@
 -- Mostrar dados do jogo selecionado:
 SELECT
-    G.ID AS id,
-    G.Date AS date,
-    G.Season AS status,
-    TH.Nickname AS teamHome,
-    THS.Points AS Points_Home,
-    TA.Nickname AS teamAway,
-    TAS.Points AS pointsAway,
-    THS.Rebounds,
-    THS.Assists,
-    FORMAT(THS.3_Point_Percentage * 100, 1) AS Home_3_Point_Percentage,
-    FORMAT(THS.Free_Throw_Percentage * 100, 1) AS Home_Free_Throw_Percentage,
-    FORMAT(THS.Field_Goal_Percentage * 100, 1) AS Home_Field_Goal_Percentage
-FROM Game AS G
-         INNER JOIN Team AS TH ON TH.ID = G.fk_Team_ID_Home
-         INNER JOIN TeamStatistics AS THS ON THS.fk_Team_ID = TH.ID AND THS.fk_Game_ID = G.ID
-         INNER JOIN Team AS TA ON TA.ID = G.fk_Team_ID_Away
-         INNER JOIN TeamStatistics AS TAS ON TAS.fk_Team_ID = TA.ID AND TAS.fk_Game_ID = G.ID
-WHERE THS.Points IS NOT NULL
-   OR TAS.Points IS NOT NULL HAVING Game_ID = :game_id
+    g.ID,
+    g.Date,
+    g.Season,
+    th.Nickname AS teamHome,
+    ths.Points AS pointsHome,
+    ta.Nickname AS teamAway,
+    tas.Points AS pointsAway,
+    ths.Rebounds AS homeRebounds,
+    ths.Assists AS homeAssists,
+    tas.Rebounds AS awayRebounds,
+    tas.Assists AS awayAssists,
+    FORMAT(ths.3_Point_Percentage * 100, 1) AS Home3PointPercentage,
+    FORMAT(ths.Free_Throw_Percentage * 100, 1) AS HomeFreeThrowPercentage,
+    FORMAT(ths.Field_Goal_Percentage * 100, 1) AS HomeFieldGoalPercentage,
+    FORMAT(tas.3_Point_Percentage * 100, 1) AS Away3PointPercentage,
+    FORMAT(tas.Free_Throw_Percentage * 100, 1) AS AwayFreeThrowPercentage,
+    FORMAT(tas.Field_Goal_Percentage * 100, 1) AS AwayFieldGoalPercentage
+FROM Game AS g
+    INNER JOIN Team th ON th.ID = g.fk_Team_ID_Home
+    INNER JOIN TeamStatistics ths ON ths.fk_Team_ID = th.ID AND ths.fk_Game_ID = g.ID
+    INNER JOIN Team ta ON ta.ID = g.fk_Team_ID_Away
+    INNER JOIN TeamStatistics tas ON tas.fk_Team_ID = ta.ID AND tas.fk_Game_ID = g.ID
+WHERE ths.Points IS NOT NULL
+   OR tas.Points IS NOT NULL HAVING g.ID = :game_id

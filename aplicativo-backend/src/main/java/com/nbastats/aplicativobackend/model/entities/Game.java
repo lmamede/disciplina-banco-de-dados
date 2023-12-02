@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Game {
-    private  int id;
+    private int id;
     private Date date;
     private String status;
     private Season season;

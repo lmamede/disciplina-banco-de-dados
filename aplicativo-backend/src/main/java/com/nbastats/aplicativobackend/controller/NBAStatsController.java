@@ -1,8 +1,9 @@
 package com.nbastats.aplicativobackend.controller;
 
 import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
+import com.nbastats.aplicativobackend.model.dto.GameDTO;
+import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +31,19 @@ public class NBAStatsController {
         return nbaStatsService.fetchArenaProfile(arena_name);
     }
 
-    @GetMapping(path = "/games")
-    public List<Arena> fechGames()
-    {
-        return nbaStatsService.fetchGames();
+    @GetMapping(path = "/games/season-{season}/homeTeam-{team_nickname}")
+    public List<GameDTO> fetchHomeTeamSeasonGames(@PathVariable int season, @PathVariable String team_nickname) throws IOException {
+        return nbaStatsService.fetchHomeTeamSeasonGames(season, team_nickname);
+    }
+
+    @GetMapping(path = "/games/season-{season}")
+    public List<GameDTO> fetchSeasonGames(@PathVariable int season) throws IOException {
+        return nbaStatsService.fetchSeasonGames(season);
+    }
+
+    @GetMapping(path = "/games/profile/{game_id}")
+    public List<GameProfileDTO> fetchGameProfile(@PathVariable int game_id) throws IOException {
+        return nbaStatsService.fetchGameProfile(game_id);
     }
 
     @GetMapping(path = "/players")
