@@ -5,6 +5,7 @@ import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
 import com.nbastats.aplicativobackend.model.dto.GameDTO;
 import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
+import com.nbastats.aplicativobackend.model.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class NBAStatsRepository {
     private final String ARENA_QUERIES_PATH = "database/queries/Arena/";
     private final String GAME_QUERIES_PATH = "database/queries/Game/";
+    private final String PLAYER_QUERIES_PATH = "database/queries/Player/";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -40,8 +42,11 @@ public class NBAStatsRepository {
         return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", team_nickname),BeanPropertyRowMapper.newInstance(GameDTO.class)).toList();
     }
 
-    public List<Arena> getPlayers() {
-        return Collections.emptyList();
+    public List<Player> getSeasonPlayers(int season, String teamNickname) throws IOException {
+        URL path = Resources.getResource(PLAYER_QUERIES_PATH+"qry_players_by_season_game.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(Player.class)).toList();
     }
 
     public List<Arena> getSeasons() {

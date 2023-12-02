@@ -4,6 +4,7 @@ import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
 import com.nbastats.aplicativobackend.model.dto.GameDTO;
 import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
+import com.nbastats.aplicativobackend.model.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.nbastats.aplicativobackend.service.NBAStatsService;
@@ -30,14 +31,14 @@ public class NBAStatsController {
     }
 
     @PostMapping(path = "/games",  consumes = {"application/json"})
-    public List<GameDTO> fetchHomeTeamSeasonGames(@RequestBody Map<String, String> dados) throws IOException {
+    public List<GameDTO> fetchHomeTeamSeasonGames(@RequestBody Map<String, String> data) throws IOException {
 
-        if(!dados.get("season").isEmpty() && !dados.get("team_nickname").isEmpty()){
-            return nbaStatsService.fetchHomeTeamSeasonGames(Integer.parseInt(dados.get("season")), dados.get("team_nickname"));
-        } else if (!dados.get("season").isEmpty() && dados.get("team_nickname").isEmpty()){
-            return nbaStatsService.fetchSeasonGames(Integer.parseInt(dados.get("season")));
+        if(!data.get("season").isEmpty() && !data.get("team_nickname").isEmpty()){
+            return nbaStatsService.fetchHomeTeamSeasonGames(Integer.parseInt(data.get("season")), data.get("team_nickname"));
+        } else if (!data.get("season").isEmpty() && data.get("team_nickname").isEmpty()){
+            return nbaStatsService.fetchSeasonGames(Integer.parseInt(data.get("season")));
         } else{
-            return nbaStatsService.fetchTeamGames(dados.get("team_nickname"));
+            return nbaStatsService.fetchTeamGames(data.get("team_nickname"));
         }
     }
 
@@ -46,10 +47,9 @@ public class NBAStatsController {
         return nbaStatsService.fetchGameProfile(game_id);
     }
 
-    @GetMapping(path = "/players")
-    public List<Arena> fetchPlayers()
-    {
-        return nbaStatsService.fetchPlayers();
+    @PostMapping(path = "/players")
+    public List<Player> fetchPlayers(@RequestBody Map<String, String> data) throws IOException {
+        return nbaStatsService.SeasonPlayers(Integer.parseInt(data.get("season")),data.get("team_nickname"));
     }
 
     @GetMapping(path = "/seasons")

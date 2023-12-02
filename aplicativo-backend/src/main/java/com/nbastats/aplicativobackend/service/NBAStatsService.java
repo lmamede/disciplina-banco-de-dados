@@ -4,6 +4,7 @@ import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
 import com.nbastats.aplicativobackend.model.dto.GameDTO;
 import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
+import com.nbastats.aplicativobackend.model.entities.Player;
 import com.nbastats.aplicativobackend.repository.NBAStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class NBAStatsService {
         return nbaStatsRepository.getHomeTeamSeasonGames(season, team_nickname);
     }
 
-    public List<Arena> fetchPlayers() {
-        return nbaStatsRepository.getPlayers();
+    public List<Player> SeasonPlayers(int season, String teamNickname) throws IOException {
+        return nbaStatsRepository.getSeasonPlayers(season, teamNickname);
     }
 
     public List<Arena> fetchSeasons() {
