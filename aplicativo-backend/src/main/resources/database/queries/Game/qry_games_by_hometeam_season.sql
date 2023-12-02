@@ -15,4 +15,5 @@ FROM Game AS g
     INNER JOIN TeamStatistics AS tas ON tas.fk_Team_ID = ta.ID AND tas.fk_Game_ID = g.ID
     LEFT JOIN Team t ON t.ID = g.fk_Team_ID_Home
 WHERE g.Season = :season
-AND t.Nickname = :team_nickname;
+AND t.Nickname = :team_nickname
+AND (ths.Points IS NOT NULL OR tas.Points IS NOT NULL);

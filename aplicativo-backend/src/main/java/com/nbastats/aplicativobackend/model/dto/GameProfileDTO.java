@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -11,7 +12,7 @@ import java.util.Date;
 public class GameProfileDTO {
     private int id;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
     private String status;
     private int season;
     private int pointsHome;

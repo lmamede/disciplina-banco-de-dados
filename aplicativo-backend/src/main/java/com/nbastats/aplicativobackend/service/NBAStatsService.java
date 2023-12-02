@@ -47,4 +47,8 @@ public class NBAStatsService {
     public List<GameProfileDTO> fetchGameProfile(int game_id) throws IOException {
         return nbaStatsRepository.getGameProfile(game_id);
     }
+
+    public List<GameDTO> fetchTeamGames(String teamNickname) throws IOException {
+        return nbaStatsRepository.getTeamGames(teamNickname);
+    }
 }

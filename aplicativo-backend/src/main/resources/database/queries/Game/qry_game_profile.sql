@@ -23,4 +23,4 @@ FROM Game AS g
     INNER JOIN Team ta ON ta.ID = g.fk_Team_ID_Away
     INNER JOIN TeamStatistics tas ON tas.fk_Team_ID = ta.ID AND tas.fk_Game_ID = g.ID
 WHERE ths.Points IS NOT NULL
-   OR tas.Points IS NOT NULL HAVING g.ID = :game_id
+OR tas.Points IS NOT NULL HAVING g.ID = :game_id

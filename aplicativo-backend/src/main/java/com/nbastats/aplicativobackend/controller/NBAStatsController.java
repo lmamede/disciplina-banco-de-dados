@@ -5,14 +5,12 @@ import com.nbastats.aplicativobackend.model.dto.GameDTO;
 import com.nbastats.aplicativobackend.model.dto.GameProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.nbastats.aplicativobackend.service.NBAStatsService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/nba")
@@ -31,14 +29,16 @@ public class NBAStatsController {
         return nbaStatsService.fetchArenaProfile(arena_name);
     }
 
-    @GetMapping(path = "/games/season-{season}/homeTeam-{team_nickname}")
-    public List<GameDTO> fetchHomeTeamSeasonGames(@PathVariable int season, @PathVariable String team_nickname) throws IOException {
-        return nbaStatsService.fetchHomeTeamSeasonGames(season, team_nickname);
-    }
+    @PostMapping(path = "/games",  consumes = {"application/json"})
+    public List<GameDTO> fetchHomeTeamSeasonGames(@RequestBody Map<String, String> dados) throws IOException {
 
-    @GetMapping(path = "/games/season-{season}")
-    public List<GameDTO> fetchSeasonGames(@PathVariable int season) throws IOException {
-        return nbaStatsService.fetchSeasonGames(season);
+        if(!dados.get("season").isEmpty() && !dados.get("team_nickname").isEmpty()){
+            return nbaStatsService.fetchHomeTeamSeasonGames(Integer.parseInt(dados.get("season")), dados.get("team_nickname"));
+        } else if (!dados.get("season").isEmpty() && dados.get("team_nickname").isEmpty()){
+            return nbaStatsService.fetchSeasonGames(Integer.parseInt(dados.get("season")));
+        } else{
+            return nbaStatsService.fetchTeamGames(dados.get("team_nickname"));
+        }
     }
 
     @GetMapping(path = "/games/profile/{game_id}")
