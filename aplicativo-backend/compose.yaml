@@ -1,0 +1,22 @@
+services:
+  data:
+    build: scripts_db/data_container/.
+  mysql:
+    image: 'mysql:latest'
+    env_file: ./.env
+    environment:
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER=$MYSQL_USER
+    ports:
+      - $DOCKER_PORT:$LOCAL_PORT
+    volumes:
+      - "./scripts_db/nba_ddl.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./scripts_db/arena_insertion.sql:/docker-entrypoint-initdb.d/2.sql"
+      - "./scripts_db/player_insertion.sql:/docker-entrypoint-initdb.d/3.sql"
+      - "./scripts_db/team_insertion.sql:/docker-entrypoint-initdb.d/4.sql"
+      - "./scripts_db/game_insertion.sql:/docker-entrypoint-initdb.d/5.sql"
+      - "./scripts_db/others_insertion.sql:/docker-entrypoint-initdb.d/6.sql"
+    volumes_from:
+      - data
