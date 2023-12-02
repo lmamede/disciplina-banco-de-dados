@@ -27,7 +27,7 @@
   }
   
 .home-button-container {
-    display: flex;
+    display: inline-flex;
     margin-left: 35%;
 }
 
@@ -38,6 +38,8 @@
     height: 60px;
     margin-bottom: -1px;
     font-size: 20px;
+    cursor: pointer;
+    
 }
 
 .page-title-container {

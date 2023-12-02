@@ -15,15 +15,21 @@ html
 block header
 
     .homepage
+        
         .nba-logo-image-container
-            img(src='/images/logos/nba_logo.png' alt='NBA Logo')
-
+            a(href='/users/homeButton')
+                img(src='/images/logos/nba_logo.png' alt='NBA Logo')
             .home-button-container
-                button.button(class='home-button') Home
-                button.button(class='home-button') Teams
-                button.button(class='home-button') Seasons
-                button.button(class='home-button') Arenas
-                button.button(class='home-button') Games
+                a(href='/users/homeButton')
+                    button.homeButton(class='home-button') Home
+                a(href='/users/teamsButton')
+                    button.teamsButton(class='home-button') Teams
+                a(href='/users/seasonsButton')
+                    button.seasonsButton(class='home-button') Seasons
+                a(href='/users/arenasButton')
+                    button.arenasButton(class='home-button') Arenas
+                a(href='/users/gamesButton')
+                    button.gamesButton(class='home-button') Games
         
         .page-title-container
             h1(class='page-title')= page_title
