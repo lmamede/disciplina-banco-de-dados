@@ -1,7 +1,6 @@
 package com.nbastats.aplicativobackend.model.dto;
 
 
-import com.nbastats.aplicativobackend.model.entities.Arena;
 import lombok.Getter;
 import lombok.Setter;
 

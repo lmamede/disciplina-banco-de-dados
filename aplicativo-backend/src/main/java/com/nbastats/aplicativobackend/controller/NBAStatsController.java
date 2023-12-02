@@ -1,8 +1,7 @@
 package com.nbastats.aplicativobackend.controller;
 
 import com.nbastats.aplicativobackend.model.dto.*;
-import com.nbastats.aplicativobackend.model.entities.Arena;
-import com.nbastats.aplicativobackend.model.entities.TeamStatistics;
+import com.nbastats.aplicativobackend.model.dto.ArenaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.nbastats.aplicativobackend.service.NBAStatsService;
@@ -19,7 +18,7 @@ public class NBAStatsController {
     private NBAStatsService nbaStatsService;
 
     @GetMapping(path = "/arenas")
-    public List<Arena> fetchArenas() throws IOException {
+    public List<ArenaDTO> fetchArenas() throws IOException {
         return nbaStatsService.fetchArenas();
     }
 

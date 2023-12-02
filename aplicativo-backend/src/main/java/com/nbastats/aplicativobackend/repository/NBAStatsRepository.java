@@ -2,7 +2,7 @@ package com.nbastats.aplicativobackend.repository;
 
 import com.google.common.io.Resources;
 import com.nbastats.aplicativobackend.model.dto.*;
-import com.nbastats.aplicativobackend.model.entities.Arena;
+import com.nbastats.aplicativobackend.model.dto.ArenaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,11 @@ public class NBAStatsRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public List<Arena> getArenas() throws IOException {
+    public List<ArenaDTO> getArenas() throws IOException {
         URL path = Resources.getResource(ARENA_QUERIES_PATH+"qry_all_arenas.sql");
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
-        return jdbcTemplate.queryForStream(sql, (SqlParameterSource)  null,BeanPropertyRowMapper.newInstance(Arena.class)).toList();
+        return jdbcTemplate.queryForStream(sql, (SqlParameterSource)  null,BeanPropertyRowMapper.newInstance(ArenaDTO.class)).toList();
     }
 
     public List<GameDTO> getHomeTeamSeasonGames(int season, String team_nickname) throws IOException {
