@@ -82,7 +82,7 @@ public class NBAStatsRepository {
         return jdbcTemplate.queryForStream(sql, Map.of("game_id", game_id),BeanPropertyRowMapper.newInstance(GameProfileDTO.class)).toList();
     }
 
-    public List<GameDTO> getTeamGames(String teamNickname) throws IOException {
+    public List<GameDTO> getHomeTeamGames(String teamNickname) throws IOException {
         URL path = Resources.getResource(GAME_QUERIES_PATH+"qry_games_by_hometeam.sql");
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
@@ -122,5 +122,12 @@ public class NBAStatsRepository {
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
         return jdbcTemplate.queryForStream(sql, Map.of("team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(TeamAdversaryDTO.class)).toList();
+    }
+
+    public List<GameDTO> getTeamGames(String teamNickname) throws IOException {
+        URL path = Resources.getResource(TEAM_QUERIES_PATH+"qry_games_by_team.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(GameDTO.class)).toList();
     }
 }

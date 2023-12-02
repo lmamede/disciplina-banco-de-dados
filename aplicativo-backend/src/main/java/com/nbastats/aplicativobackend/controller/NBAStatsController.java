@@ -35,7 +35,7 @@ public class NBAStatsController {
         } else if (!data.get("season").isEmpty() && data.get("team_nickname").isEmpty()){
             return nbaStatsService.fetchSeasonGames(Integer.parseInt(data.get("season")));
         } else{
-            return nbaStatsService.fetchTeamGames(data.get("team_nickname"));
+            return nbaStatsService.fetchHomeTeamGames(data.get("team_nickname"));
         }
     }
 
@@ -79,13 +79,18 @@ public class NBAStatsController {
         return nbaStatsService.fetchTeams();
     }
 
+    @GetMapping(path = "/teams/profile/{team_nickname}")
+    public List<TeamProfileDTO> fetchTeamProfile(@PathVariable String team_nickname) throws IOException {
+        return nbaStatsService.fetchTeamProfile(team_nickname);
+    }
+
     @GetMapping(path = "/teams/profile/{team_nickname}/statistics/adversaries")
     public List<TeamAdversaryDTO> fetchTeamAdversaryStats(@PathVariable String team_nickname) throws IOException {
         return nbaStatsService.fetchTeamAdversaryStats(team_nickname);
     }
 
-    @GetMapping(path = "/teams/profile/{team_nickname}")
-    public List<TeamProfileDTO> fetchTeamProfile(@PathVariable String team_nickname) throws IOException {
-        return nbaStatsService.fetchTeamProfile(team_nickname);
+    @GetMapping(path = "/teams/profile/{team_nickname}/games")
+    public List<GameDTO> fetchTeamGames(@PathVariable String team_nickname) throws IOException {
+        return nbaStatsService.fetchTeamGames(team_nickname);
     }
 }

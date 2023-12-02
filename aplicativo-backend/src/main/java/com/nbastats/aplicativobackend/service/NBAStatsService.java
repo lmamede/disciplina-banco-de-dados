@@ -46,8 +46,8 @@ public class NBAStatsService {
         return nbaStatsRepository.getGameProfile(game_id);
     }
 
-    public List<GameDTO> fetchTeamGames(String teamNickname) throws IOException {
-        return nbaStatsRepository.getTeamGames(teamNickname);
+    public List<GameDTO> fetchHomeTeamGames(String teamNickname) throws IOException {
+        return nbaStatsRepository.getHomeTeamGames(teamNickname);
     }
 
     public List<PlayerProfileDTO> fetchPlayerProfile(String playerName) throws IOException {
@@ -68,5 +68,9 @@ public class NBAStatsService {
 
     public List<TeamAdversaryDTO> fetchTeamAdversaryStats(String teamNickname) throws IOException {
         return nbaStatsRepository.getTeamAdversaryStats(teamNickname);
+    }
+
+    public List<GameDTO> fetchTeamGames(String teamNickname) throws IOException {
+        return nbaStatsRepository.getTeamGames(teamNickname);
     }
 }
