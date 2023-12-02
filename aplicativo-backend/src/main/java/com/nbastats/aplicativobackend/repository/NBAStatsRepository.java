@@ -1,6 +1,7 @@
 package com.nbastats.aplicativobackend.repository;
 
 import com.google.common.io.Resources;
+import com.nbastats.aplicativobackend.model.dto.ArenaProfileDTO;
 import com.nbastats.aplicativobackend.model.entities.Arena;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,9 +14,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Repository
-public class CatalogueRepository {
+public class NBAStatsRepository {
     private final String ARENA_QUERIES_PATH = "database/queries/Arena/";
 
     @Autowired
@@ -42,5 +44,12 @@ public class CatalogueRepository {
 
     public List<Arena> getTeams() {
         return Collections.emptyList();
+    }
+
+    public List<ArenaProfileDTO> getArenasProfile(String arena_name) throws IOException {
+        URL path = Resources.getResource(ARENA_QUERIES_PATH+"qry_arena_profile.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("arena_name", arena_name),BeanPropertyRowMapper.newInstance(ArenaProfileDTO.class)).toList();
     }
 }
