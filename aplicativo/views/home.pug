@@ -1,4 +1,4 @@
-extends menu
+include menu
 
 block styling
     link(rel= 'stylesheet', href='/stylesheets/home.css')
@@ -8,3 +8,13 @@ block content
     .page-content-container
         p The data used in this project is available in Kaggle.
         p This project is part of UFRJ's Computer Science Bsc Program
+
+        .ownership-logos-container 
+            img(src='/images/logos/kaggle_logo.png' alt='Kaggle Logo' style='width: 23%; height: 23%;')
+            img(src='/images/logos/ic_logo.png' alt='IC Logo' style='width: 23%; height: 23%;')
+            img(src='/images/logos/ufrj_logo.png' alt='UFRJ Logo' style='width: 23%; height: 23%;')
+
+        
+        p Dataset provided by Nathan Lauga
+
+include footer
