@@ -14,5 +14,4 @@ public class TeamStatistics {
     private double percentageFieldGoal;
     private int points;
     private Team team;
-    private Game game;
 }

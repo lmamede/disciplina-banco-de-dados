@@ -21,6 +21,7 @@ public class NBAStatsRepository {
     private final String ARENA_QUERIES_PATH = "database/queries/Arena/";
     private final String GAME_QUERIES_PATH = "database/queries/Game/";
     private final String PLAYER_QUERIES_PATH = "database/queries/Player/";
+    private final String SEASON_QUERIES_PATH = "database/queries/Season/";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -46,8 +47,11 @@ public class NBAStatsRepository {
         return jdbcTemplate.queryForStream(sql, Map.of("season", season, "team_nickname", teamNickname),BeanPropertyRowMapper.newInstance(PlayerDTO.class)).toList();
     }
 
-    public List<Arena> getSeasons() {
-        return Collections.emptyList();
+    public List<SeasonDTO> getSeasons() throws IOException {
+        URL path = Resources.getResource(SEASON_QUERIES_PATH+"qry_all_seasons.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, (SqlParameterSource)  null,BeanPropertyRowMapper.newInstance(SeasonDTO.class)).toList();
     }
 
     public List<Arena> getTeams() {
@@ -87,5 +91,19 @@ public class NBAStatsRepository {
         String sql = Resources.toString(path, StandardCharsets.UTF_8);
 
         return jdbcTemplate.queryForStream(sql, Map.of("player_name", playerName),BeanPropertyRowMapper.newInstance(PlayerProfileDTO.class)).toList();
+    }
+
+    public List<SeasonTeamPointsDTO> getSeasonPointsStats(int season) throws IOException {
+        URL path = Resources.getResource(SEASON_QUERIES_PATH+"qry_points_avg.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("season", season),BeanPropertyRowMapper.newInstance(SeasonTeamPointsDTO.class)).toList();
+    }
+
+    public List<SeasonVictoriesDTO> getSeasonWinStats(int season) throws IOException {
+        URL path = Resources.getResource(SEASON_QUERIES_PATH+"qry_victory_percentage.sql");
+        String sql = Resources.toString(path, StandardCharsets.UTF_8);
+
+        return jdbcTemplate.queryForStream(sql, Map.of("season", season),BeanPropertyRowMapper.newInstance(SeasonVictoriesDTO.class)).toList();
     }
 }

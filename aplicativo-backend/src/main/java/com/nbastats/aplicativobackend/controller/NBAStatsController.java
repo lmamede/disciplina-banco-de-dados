@@ -55,9 +55,23 @@ public class NBAStatsController {
     }
 
     @GetMapping(path = "/seasons")
-    public List<Arena> fetchSeasons()
-    {
+    public List<SeasonDTO> fetchSeasons() throws IOException {
         return nbaStatsService.fetchSeasons();
+    }
+
+    @GetMapping(path = "/seasons/{season}/games")
+    public List<GameDTO> fetchSeasonGames(@PathVariable int season) throws IOException {
+        return nbaStatsService.fetchSeasonGames(season);
+    }
+
+    @GetMapping(path = "/seasons/{season}/statistics/points")
+    public List<SeasonTeamPointsDTO> fetchSeasonPointsStats(@PathVariable int season) throws IOException {
+        return nbaStatsService.fetchSeasonPointsStats(season);
+    }
+
+    @GetMapping(path = "/seasons/{season}/statistics/victories")
+    public List<SeasonVictoriesDTO> fetchSeasonWinStats(@PathVariable int season) throws IOException {
+        return nbaStatsService.fetchSeasonWinStats(season);
     }
 
     @GetMapping(path = "/teams")

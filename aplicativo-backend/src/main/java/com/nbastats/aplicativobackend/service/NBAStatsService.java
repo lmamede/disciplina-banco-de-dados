@@ -26,7 +26,7 @@ public class NBAStatsService {
         return nbaStatsRepository.getSeasonPlayers(season, teamNickname);
     }
 
-    public List<Arena> fetchSeasons() {
+    public List<SeasonDTO> fetchSeasons() throws IOException {
         return nbaStatsRepository.getSeasons();
     }
 
@@ -52,5 +52,13 @@ public class NBAStatsService {
 
     public List<PlayerProfileDTO> fetchPlayerProfile(String playerName) throws IOException {
         return nbaStatsRepository.getPlayerProfile(playerName);
+    }
+
+    public List<SeasonTeamPointsDTO> fetchSeasonPointsStats(int season) throws IOException {
+        return nbaStatsRepository.getSeasonPointsStats(season);
+    }
+
+    public List<SeasonVictoriesDTO> fetchSeasonWinStats(int season) throws IOException {
+        return nbaStatsRepository.getSeasonWinStats(season);
     }
 }
