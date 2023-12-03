@@ -10,13 +10,26 @@ services:
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_USER=$MYSQL_USER
     ports:
-      - $DOCKER_PORT:$LOCAL_PORT
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
     volumes:
       - "./scripts_db/nba_ddl.sql:/docker-entrypoint-initdb.d/1.sql"
       - "./scripts_db/arena_insertion.sql:/docker-entrypoint-initdb.d/2.sql"
       - "./scripts_db/player_insertion.sql:/docker-entrypoint-initdb.d/3.sql"
       - "./scripts_db/team_insertion.sql:/docker-entrypoint-initdb.d/4.sql"
       - "./scripts_db/game_insertion.sql:/docker-entrypoint-initdb.d/5.sql"
-      - "./scripts_db/others_insertion.sql:/docker-entrypoint-initdb.d/6.sql"
+      - "./scripts_db/teamStatistics_insertion.sql:/docker-entrypoint-initdb.d/6.sql"
+      - "./scripts_db/others_insertion.sql:/docker-entrypoint-initdb.d/7.sql"
     volumes_from:
       - data
+  app:
+    depends_on:
+      mysql:
+        condition: service_completed_successfully
+    build: ./.
+    env_file: ./.env
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysql:$MYSQL_DOCKER_PORT/$MYSQL_DATABASE?allowPublicKeyRetrieval=true&useSSL=false"
+      }'
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
