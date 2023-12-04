@@ -1,0 +1,19 @@
+.card {
+    align-items: center;
+    background: #a9a9a9;
+    box-shadow: 0 2vw 2vw rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    min-height: 12.7vw;
+    width: 100%;
+    color: white;
+    font-size: 0.8vw;
+    font-weight: lighter;
+}
+  
+  .cardGrid {
+    display: grid;
+    column-gap: 6vw;
+    row-gap: 6vw;
+    grid-template-columns: repeat(auto-fit, 12.7vw);
+  }
