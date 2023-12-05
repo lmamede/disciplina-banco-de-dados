@@ -1,11 +1,13 @@
 import {useState, useEffect} from 'react'
 
+const apiRoot = "http://localhost:8080/api/nba/"
 
 export const useFetch = (url) => {
     const [request, setRequest] = useState(null)
     const [method, setMethod] = useState(null)
     const [data, setData] = useState(null)
     const [pathParam, setPathParam] = useState("")
+    const [api, setApi] = useState(apiRoot + url)
 
     const buildRequest = (param, method) => {
         if(method === "POST") {
@@ -26,8 +28,8 @@ export const useFetch = (url) => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                if(method === "GET") url+="/"+pathParam
-                let fetchOptions = [url, request]
+                if(method === "GET") api+="/"+pathParam
+                let fetchOptions = [api, request]
                 const res = await fetch(...fetchOptions)
                 const json = await res.json()
                 setData(json)
@@ -39,7 +41,7 @@ export const useFetch = (url) => {
 
         fetchData()
 
-    },[url, pathParam, request])
+    },[api, pathParam, request])
 
     return {data, buildRequest};
 }

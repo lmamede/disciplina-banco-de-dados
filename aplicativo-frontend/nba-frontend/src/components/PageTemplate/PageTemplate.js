@@ -1,13 +1,23 @@
 import './PageTemplate.scss'
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 import ContentSection from './ContentSection'
-import FirstSection from './FirstSection'
+import LongSection from './LongSection'
+import ShortSection from './ShortSection'
 
-const PageTemplate = ({children, backImgSrc, sectionTitle, sectionSubtitle}) => {
+const PageTemplate = ({children, backImgSrc, sectionTitle, sectionSubtitle, longSection}) => {
+    const [useLongSection, setUseLongSection] = useState(longSection)
+
+    useEffect(() => {
+      return () => {
+        setUseLongSection(longSection)
+      }
+    }, [longSection])
     
+
     return (
         <div>
-            <FirstSection backImgSrc={backImgSrc} sectionTitle={sectionTitle} sectionSubtitle={sectionSubtitle}/>
+            {useLongSection && (<LongSection backImgSrc={backImgSrc} sectionTitle={sectionTitle} sectionSubtitle={sectionSubtitle}/>)}
+            {!useLongSection && (<ShortSection backImgSrc={backImgSrc} sectionTitle={sectionTitle} sectionSubtitle={sectionSubtitle}/>)}
             <ContentSection>
                 {children}
             </ContentSection>

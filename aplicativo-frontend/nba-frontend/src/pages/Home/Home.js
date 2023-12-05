@@ -9,6 +9,7 @@ const Home = () => {
             backImgSrc={"/FirstSectionImage/HomeBackground5.png"}
             sectionTitle={"NBA SEASON STATS"}
             sectionSubtitle={"FROM 2000 TO 2020"}
+            longSection={true}
         >
             <p>Coloque o conteúdo aqui</p>
         </PageTemplate>
