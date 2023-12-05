@@ -4,8 +4,8 @@ import Header from '../Header/Header'
 
 const ShortSection = ({backImgSrc, sectionTitle, sectionSubtitle}) => {
     return (
-        <div className='short-section' style={{ backgroundImage: `url(${backImgSrc})`}}>
-            <div className="short-content center">
+        <div className='short section' style={{ backgroundImage: `url(${backImgSrc})`}}>
+            <div className="section-content center">
                 <Header/>
                 <p className='section-title'>{sectionTitle}</p>
                 <p className='section-subtitle'>{sectionSubtitle}</p>

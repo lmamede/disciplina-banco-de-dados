@@ -1,10 +1,12 @@
 import './ContentSection.scss'
 import React from 'react'
 
-const ContentSection = ({children}) => (
-    <div className="content center">
-        {children}
-    </div>
-)
+const ContentSection = ({children}) => {
+    return (
+        <div className="content center">
+            {children}
+        </div>
+    )
+}
 
 export default ContentSection

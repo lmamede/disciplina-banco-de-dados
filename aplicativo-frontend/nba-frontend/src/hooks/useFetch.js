@@ -7,7 +7,6 @@ export const useFetch = (url) => {
     const [method, setMethod] = useState(null)
     const [data, setData] = useState(null)
     const [pathParam, setPathParam] = useState("")
-    const [api, setApi] = useState(apiRoot + url)
 
     const buildRequest = (param, method) => {
         if(method === "POST") {
@@ -26,6 +25,7 @@ export const useFetch = (url) => {
 
     
     useEffect(() => {
+        var api = apiRoot + url
         const fetchData = async () => {
             try{
                 if(method === "GET") api+="/"+pathParam
@@ -41,7 +41,7 @@ export const useFetch = (url) => {
 
         fetchData()
 
-    },[api, pathParam, request])
+    },[url, pathParam, request, method])
 
     return {data, buildRequest};
 }

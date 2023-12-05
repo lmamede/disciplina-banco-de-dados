@@ -1,8 +1,8 @@
 import {React, useState, useEffect} from 'react'
 
-const CatalogCard = ({itemInfo, index, cardImagePathRoot}) => {
+const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt}) => {
     const [textFormat, setTextFormat] = useState(itemInfo)
-    const [itemImage, setItemImage] = useState(cardImagePathRoot + itemInfo.replaceAll(" ", '_').toLowerCase() + ".jpg")
+    const itemImage = cardImagePathRoot + itemInfo.replaceAll(" ", '_').toLowerCase() + cardImageExt
 
     useEffect(() => {
       return () => {

@@ -17,7 +17,7 @@ const Arena = () => {
                 sectionSubtitle={"WHERE THE MAGIC HAPPENS"}
                 longSection={false}
             >
-                <CatalogGrid itemsList={arenas} cardImagePathRoot={"ArenaCard/"}/>
+                <CatalogGrid itemsList={arenas} itemField={"name"} cardImagePathRoot={"ArenaCard/"} cardImageExt={".jpg"}/>
             </PageTemplate>
         </div>
     )

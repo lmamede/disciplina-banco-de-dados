@@ -3,6 +3,7 @@ import {React, useState, useEffect} from 'react'
 import ContentSection from './ContentSection'
 import LongSection from './LongSection'
 import ShortSection from './ShortSection'
+import Footer from '../Footer/Footer'
 
 const PageTemplate = ({children, backImgSrc, sectionTitle, sectionSubtitle, longSection}) => {
     const [useLongSection, setUseLongSection] = useState(longSection)
@@ -21,6 +22,7 @@ const PageTemplate = ({children, backImgSrc, sectionTitle, sectionSubtitle, long
             <ContentSection>
                 {children}
             </ContentSection>
+            <Footer/>
         </div>
   )
 }

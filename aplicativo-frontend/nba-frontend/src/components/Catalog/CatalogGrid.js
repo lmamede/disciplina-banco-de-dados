@@ -3,11 +3,11 @@ import './CatalogGrid.scss'
 import React from 'react'
 import CatalogCard from './CatalogCard'
 
-const CatalogGrid = ({itemsList, cardImagePathRoot}) => {
+const CatalogGrid = ({itemsList, itemField, cardImagePathRoot, cardImageExt}) => {
     return (
         <div className="cardGrid">
             {itemsList && itemsList.map((item, i) => (
-                    <CatalogCard itemInfo={item.name} index={i} cardImagePathRoot={cardImagePathRoot}/>
+                    <CatalogCard itemInfo={String(item[itemField])} index={i} cardImagePathRoot={cardImagePathRoot} cardImageExt={cardImageExt}/>
                 ))
             }
         </div>
