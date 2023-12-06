@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { useFetch } from '../../hooks/useFetch'
 import CatalogGridModal from './CatalogGridModal'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
@@ -7,8 +7,12 @@ const url = "arenas"
 
 const Arena = () => {
     const {data: arenas, buildRequest} = useFetch(url)
-    buildRequest("", "GET")
 
+    useEffect(() => {
+        buildRequest("", "GET")
+    }, [])
+    
+    
     return (
         <div>
             <PageTemplate 

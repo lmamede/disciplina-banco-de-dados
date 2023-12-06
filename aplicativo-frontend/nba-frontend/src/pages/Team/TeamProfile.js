@@ -1,5 +1,5 @@
 import './TeamProfile.scss'
-import React from 'react'
+import {React, useEffect} from 'react'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
 import TeamInfo from './TeamInfo'
 import TeamHomeWinStats from '../../components/Stats/TeamHomeWinStats'
@@ -21,9 +21,12 @@ const TeamProfile = () => {
     const {data: adversaries, buildRequest: requestAdversaries} = useFetch(url)
     const {data: games, buildRequest: requestGames} = useFetch(url)
 
-    requestProfile(param.nickname, "GET")
-    requestAdversaries(param.nickname + endpointStatsAd, "GET")
-    requestGames(param.nickname + endpointGames, "GET")
+    useEffect(() => {
+        requestProfile(param.nickname, "GET")
+        requestAdversaries(param.nickname + endpointStatsAd, "GET")
+        requestGames(param.nickname + endpointGames, "GET")
+    }, [])
+    
 
     return (
         <div>

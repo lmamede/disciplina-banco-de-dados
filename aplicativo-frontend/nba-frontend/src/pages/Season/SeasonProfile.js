@@ -1,5 +1,5 @@
 import './SeasonProfile.scss'
-import React from 'react'
+import {React, useEffect} from 'react'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
 import { useFetch } from '../../hooks/useFetch'
 import {useLocation} from 'react-router-dom'
@@ -23,9 +23,12 @@ const SeasonProfile = () => {
     const {data: points, buildRequest: requestPoints} = useFetch(url)
     const {data: victories, buildRequest: requestVictories} = useFetch(url)
 
-    requestGames(param.year + endpointGames, "GET")
-    requestPoints(param.year + endpointStatsPoint, "GET")
-    requestVictories(param.year + endpointStatsVictories, "GET")
+    useEffect(() => {
+        requestGames(param.year + endpointGames, "GET")
+        requestPoints(param.year + endpointStatsPoint, "GET")
+        requestVictories(param.year + endpointStatsVictories, "GET")
+    }, [])
+
 
 
     return (

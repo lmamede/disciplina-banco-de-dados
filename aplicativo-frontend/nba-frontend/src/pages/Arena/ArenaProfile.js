@@ -6,22 +6,14 @@ import { useFetch } from '../../hooks/useFetch'
 
 const url = "arenas/profile"
 const ArenaProfile = ({isOpen, item, imagProfile}) => {
-    const {data: arenas, buildRequest} = useFetch(url)
-    buildRequest(item.name, "GET")
-
-    const [arena, setArena] = useState(null);
     const [open, setOpen] = useState(isOpen);
     const handleClose = () => setOpen(false);
+    const {data: arena, buildRequest} = useFetch(url)
 
     useEffect(() => {
-        return () => {
-            if(arenas){
-                setArena(arenas[0])
-            }
-        }
-    }, [arenas])
-    
-
+        buildRequest(item.name, "GET")
+    }, [item])
+        
     return (
         <div>
             <Modal
@@ -34,20 +26,20 @@ const ArenaProfile = ({isOpen, item, imagProfile}) => {
                 <Box className='modal-content'>
                     <img src={imagProfile} alt="" className='arena-image'/>
                     <div className="arena-profile">
-                        <h1>{arena && arena.name.toUpperCase()}</h1>
+                        <h1>{arena && arena[0].name.toUpperCase()}</h1>
                         <label >
                             Capacity
-                            <p>{arena && arena.capacity}</p>
+                            <p>{arena && arena[0].capacity}</p>
                         </label>
 
                         <label >
                             Owner
-                            <p>{arena && arena.nickname}</p>
+                            <p>{arena && arena[0].nickname}</p>
                         </label>
 
                         <label >
                             City
-                            <p>{arena && arena.city}</p>
+                            <p>{arena && arena[0].city}</p>
                         </label>
                     </div>
                 </Box>

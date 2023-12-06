@@ -3,7 +3,6 @@ import React from 'react'
 import { VictoryPie } from 'victory'
 
 const TeamTotalWinStats = ({data}) => {
-    console.log(data)
     const totalWin = data? data.totalWinsPercentage : ''
     const totalLoss = totalWin? 100-totalWin : ''
     return (

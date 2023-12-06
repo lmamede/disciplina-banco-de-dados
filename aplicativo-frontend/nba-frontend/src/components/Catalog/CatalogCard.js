@@ -5,7 +5,6 @@ const CatalogCard = ({itemInfo, itemField, index, cardImagePathRoot, cardImageEx
     const [textFormat, setTextFormat] = useState(String(itemInfo[itemField]))
     const itemImage = cardImagePathRoot + String(itemInfo[itemField]).replaceAll(" ", '_').toLowerCase() + cardImageExt
 
-    console.log(itemField)
     useEffect(() => {
       return () => {
         setTextFormat(textFormat.replaceAll(" ", '\n').toUpperCase())

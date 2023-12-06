@@ -3,27 +3,25 @@ import React from 'react'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
-import GameMatch from './GamePageMatch';
+import GamePageMatch from './GamePageMatch';
 
-const GameList = ({games, imgRoot}) => {
+const GamePageList = ({games, imgRoot, to}) => {
     return (
-        <div>
-            <List className='game-page-list'>
-                {games && games.map((game, i) => (
-                    <div>
-                        <ListItem alignItems="flex-start">
-                            <GameMatch 
-                                game={game} imgRoot={imgRoot}
-                            />
-                            
-                        </ListItem>
-                        <Divider component="li" />
-                    </div>
-                )
-                )}        
-            </List>
-        </div>
+        <List className='game-page-list'>
+            {games && games.map((game, i) => (
+                <div key={i}>
+                    <ListItem alignItems="flex-start" key={i}>
+                        <GamePageMatch 
+                            game={game} key={i} imgRoot={imgRoot} to={to}
+                        />
+                        
+                    </ListItem>
+                    <Divider component="li" />
+                </div>
+            )
+            )}        
+        </List>
     )
 }
 
-export default GameList
+export default GamePageList

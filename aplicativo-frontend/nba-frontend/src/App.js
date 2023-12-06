@@ -1,6 +1,7 @@
 import './App.scss';
 import Arena from './pages/Arena/Arena';
 import Game from './pages/Game/Game';
+import GameProfile from './pages/Game/GameProfile';
 import Home from './pages/Home/Home';
 import Season from './pages/Season/Season';
 import SeasonProfile from './pages/Season/SeasonProfile';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/seasons" element={ <Season /> }/>
           <Route path="/seasons/profile" element={ <SeasonProfile /> }/>
           <Route path="/games" element={ <Game /> }/>
+          <Route path="/games/profile" element={ <GameProfile /> }/>
           <Route path="/teams" element={ <Team /> }/>
           <Route path="/teams/profile" element={ <TeamProfile /> }/>
         </Routes>

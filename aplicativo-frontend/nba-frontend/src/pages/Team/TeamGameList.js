@@ -10,7 +10,7 @@ const TeamGameList = ({games, imgRoot}) => {
             <p className='team-game-title'>GAMES</p>
              <List className='team-game-list'>
                 {games && games.map((game, i) => (
-                        <div>
+                        <div key={i}>
                             <ListItem alignItems="flex-start">
                                 <GameMatch 
                                     game={game} imgRoot={imgRoot}
