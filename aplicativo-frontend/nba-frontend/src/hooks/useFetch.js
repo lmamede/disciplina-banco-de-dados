@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const apiRoot = "http://localhost:8080/api/nba/"
+const apiRoot = "http://localhost:6868/api/nba/"
 
 export const useFetch = (url) => {
     const [request, setRequest] = useState(null)
