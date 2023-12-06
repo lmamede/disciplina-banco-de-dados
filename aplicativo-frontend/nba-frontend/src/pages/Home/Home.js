@@ -8,9 +8,23 @@ const Home = () => {
         <PageTemplate 
             backImgSrc={"/FirstSectionImage/HomeBackground5.png"}
             sectionTitle={"NBA SEASON STATS"}
-            sectionSubtitle={"FROM 2000 TO 2020"}
+            sectionSubtitle={"FROM 2003 TO 2022"}
+            longSection={true}
         >
-            <p>Coloque o conteúdo aqui</p>
+          <div className="home-content-container">
+            <p>
+              The data used in this project is avaible in Kaggle. <br />
+              This project is part of UFRJ’s Computer Science Bsc Program.
+            </p>
+            <div className="logos">
+              <img src="HomePage/kaggle_logo.png" alt="Kaggle Logo" />
+              <img src="HomePage/ic_logo.png" alt="IC Logo" />
+              <img src="HomePage/ufrj_logo.png" alt="UFRJ Logo" />
+            </div>
+            <p className='credit'>
+              Dataset provided by Nathan Lauga
+            </p>
+          </div>
         </PageTemplate>
     </div>
   )

@@ -5,10 +5,12 @@ import com.nbastats.aplicativobackend.model.dto.ArenaDTO;
 import com.nbastats.aplicativobackend.repository.NBAStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
 
+@Transactional
 @Service
 public class NBAStatsService {
     @Autowired

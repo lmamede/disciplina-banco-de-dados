@@ -1,9 +1,24 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 
-const CatalogCard = ({itemInfo, index}) => {
+const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt, to}) => {
+    const [textFormat, setTextFormat] = useState(itemInfo)
+    const itemImage = cardImagePathRoot + itemInfo.replaceAll(" ", '_').toLowerCase() + cardImageExt
+
+    useEffect(() => {
+      return () => {
+        setTextFormat(textFormat.replaceAll(" ", '\n').toUpperCase())
+      }
+    }, [textFormat, itemImage])
+    
+
     return (
-        <div className="card" key={index}>
-            <h2>{itemInfo}</h2>
+        <div className="card" key={index} style={{ backgroundImage: `url(${itemImage})`}}>
+            <Link to={to} state={{param : itemInfo}}>
+              <div className="container-opacity">
+                  <pre>{textFormat}</pre>
+              </div>
+            </Link>
         </div>
     )
 }

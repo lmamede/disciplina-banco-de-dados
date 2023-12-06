@@ -21,10 +21,14 @@ services:
       - "./scripts_db/others_insertion.sql:/docker-entrypoint-initdb.d/7.sql"
     volumes_from:
       - data
+    healthcheck:
+      test: ["CMD", "mysql" , "-h", "localhost", "--port=$MYSQL_DOCKER_PORT", "--protocol=TCP", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
+      timeout: 60s
+      retries: 120
   app:
     depends_on:
       mysql:
-        condition: service_completed_successfully
+        condition: service_healthy
     build: ./.
     env_file: ./.env
     environment:

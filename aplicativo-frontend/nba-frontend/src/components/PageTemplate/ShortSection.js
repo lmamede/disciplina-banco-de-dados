@@ -1,11 +1,11 @@
-import './FirstSection.scss'
+import './ShortSection.scss'
 import React from 'react'
 import Header from '../Header/Header'
 
-const FirstSection = ({backImgSrc, sectionTitle, sectionSubtitle}) => {
+const ShortSection = ({backImgSrc, sectionTitle, sectionSubtitle}) => {
     return (
-        <div className='first-section' style={{ backgroundImage: `url(${backImgSrc})`}}>
-            <div className="first-content center">
+        <div className='short section' style={{ backgroundImage: `url(${backImgSrc})`}}>
+            <div className="section-content center">
                 <Header/>
                 <p className='section-title'>{sectionTitle}</p>
                 <p className='section-subtitle'>{sectionSubtitle}</p>
@@ -14,4 +14,4 @@ const FirstSection = ({backImgSrc, sectionTitle, sectionSubtitle}) => {
     )
 }
 
-export default FirstSection
+export default ShortSection

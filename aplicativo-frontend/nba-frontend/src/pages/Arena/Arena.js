@@ -1,9 +1,9 @@
 import React from 'react'
 import { useFetch } from '../../hooks/useFetch'
-import CatalogGrid from '../../components/Catalog/CatalogGrid'
+import CatalogGridModal from './CatalogGridModal'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
 
-const url = "http://localhost:8080/api/nba/arenas"
+const url = "arenas"
 
 const Arena = () => {
     const {data: arenas, buildRequest} = useFetch(url)
@@ -12,11 +12,12 @@ const Arena = () => {
     return (
         <div>
             <PageTemplate 
-                backImgSrc={"/FirstSectionImage/HomeBackground5.png"}
+                backImgSrc={"/FirstSectionImage/ArenaBackground.png"}
                 sectionTitle={"ARENAS"}
                 sectionSubtitle={"WHERE THE MAGIC HAPPENS"}
+                longSection={false}
             >
-                <CatalogGrid itemsList={arenas}/>
+                <CatalogGridModal itemsList={arenas} itemField={"name"} cardImagePathRoot={"ArenaCard/"} cardImageExt={".jpg"}/>
             </PageTemplate>
         </div>
     )
