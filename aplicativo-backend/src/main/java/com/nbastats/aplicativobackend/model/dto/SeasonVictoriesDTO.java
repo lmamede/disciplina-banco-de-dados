@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 public class SeasonVictoriesDTO {
     private int season;
-    private String homeWinPercentage;
-    private String awayWinPercentage;
+    private double homeWinPercentage;
+    private double awayWinPercentage;
 }
