@@ -16,7 +16,13 @@ const Team = () => {
                 sectionTitle={"TEAMS"}
                 sectionSubtitle={"MEET THE CHAMPIONS"}
                 longSection={false}>
-                    <CatalogGrid itemsList={teams} itemField={"nickname"} cardImagePathRoot={"TeamCard/"} cardImageExt={".png"}/>
+                    <CatalogGrid 
+                        itemsList={teams} 
+                        itemField={"nickname"} 
+                        cardImagePathRoot={"TeamCard/"} 
+                        cardImageExt={".png"}
+                        to={"/teams/profile"}
+                    />
             </PageTemplate>            
         </div>
     )

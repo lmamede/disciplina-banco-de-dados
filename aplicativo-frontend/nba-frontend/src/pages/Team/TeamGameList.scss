@@ -1,0 +1,33 @@
+.team-game-title {
+    color: #333;
+    font-weight: bold;
+    padding-top: 2vw;
+    padding-left: 0.8vw;
+    font-size: 1.5vw;
+}
+
+.team-game-list{
+    width: auto;
+    height:23vw;
+    overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

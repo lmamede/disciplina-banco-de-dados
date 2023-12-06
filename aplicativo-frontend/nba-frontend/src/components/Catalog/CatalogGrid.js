@@ -9,7 +9,8 @@ const CatalogGrid = ({itemsList, itemField, cardImagePathRoot, cardImageExt, to}
             {itemsList && itemsList.map((item, i) => (
                     <CatalogCard 
                         key={i}
-                        itemInfo={String(item[itemField])} 
+                        itemInfo={item} 
+                        itemField={itemField}
                         index={i} 
                         cardImagePathRoot={cardImagePathRoot} 
                         cardImageExt={cardImageExt}

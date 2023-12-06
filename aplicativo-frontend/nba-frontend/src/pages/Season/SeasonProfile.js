@@ -18,20 +18,21 @@ const endpointStatsVictories = "/statistics/victories"
 const SeasonProfile = () => {
     const location = useLocation()
     const { param } = location.state
+
     const {data: games, buildRequest: requestGames} = useFetch(url)
     const {data: points, buildRequest: requestPoints} = useFetch(url)
     const {data: victories, buildRequest: requestVictories} = useFetch(url)
 
-    requestGames(param + endpointGames, "GET")
-    requestPoints(param + endpointStatsPoint, "GET")
-    requestVictories(param + endpointStatsVictories, "GET")
+    requestGames(param.year + endpointGames, "GET")
+    requestPoints(param.year + endpointStatsPoint, "GET")
+    requestVictories(param.year + endpointStatsVictories, "GET")
 
 
     return (
         <div>
             <PageTemplate
                 backImgSrc={"/FirstSectionImage/SeasonBackground.png"}
-                sectionTitle={"SEASON " + param}
+                sectionTitle={"SEASON " + param.year}
                 longSection={false}>
                     <div className="season-content">
                         <div className="stats">

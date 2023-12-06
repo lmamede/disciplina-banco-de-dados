@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Season from './pages/Season/Season';
 import SeasonProfile from './pages/Season/SeasonProfile';
 import Team from './pages/Team/Team';
+import TeamProfile from './pages/Team/TeamProfile';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/seasons/profile" element={ <SeasonProfile /> }/>
           <Route path="/games" element={ <Game /> }/>
           <Route path="/teams" element={ <Team /> }/>
+          <Route path="/teams/profile" element={ <TeamProfile /> }/>
         </Routes>
       </BrowserRouter>
     </div>
