@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFetch } from '../../hooks/useFetch'
-import CatalogGrid from '../../components/Catalog/CatalogGrid'
+import CatalogGridModal from './CatalogGridModal'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
 
 const url = "arenas"
@@ -17,7 +17,7 @@ const Arena = () => {
                 sectionSubtitle={"WHERE THE MAGIC HAPPENS"}
                 longSection={false}
             >
-                <CatalogGrid itemsList={arenas} itemField={"name"} cardImagePathRoot={"ArenaCard/"} cardImageExt={".jpg"}/>
+                <CatalogGridModal itemsList={arenas} itemField={"name"} cardImagePathRoot={"ArenaCard/"} cardImageExt={".jpg"}/>
             </PageTemplate>
         </div>
     )

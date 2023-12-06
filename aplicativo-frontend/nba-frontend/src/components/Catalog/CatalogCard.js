@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 
-const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt}) => {
+const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt, to}) => {
     const [textFormat, setTextFormat] = useState(itemInfo)
     const itemImage = cardImagePathRoot + itemInfo.replaceAll(" ", '_').toLowerCase() + cardImageExt
 
@@ -8,14 +9,16 @@ const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt}) => {
       return () => {
         setTextFormat(textFormat.replaceAll(" ", '\n').toUpperCase())
       }
-    }, [itemInfo, textFormat, itemImage])
+    }, [textFormat, itemImage])
     
 
     return (
         <div className="card" key={index} style={{ backgroundImage: `url(${itemImage})`}}>
-            <div className="container-opacity">
-                <pre>{textFormat}</pre>
-            </div>
+            <Link to={to} state={{param : itemInfo}}>
+              <div className="container-opacity">
+                  <pre>{textFormat}</pre>
+              </div>
+            </Link>
         </div>
     )
 }

@@ -16,7 +16,13 @@ const Season = () => {
                 sectionTitle={"SEASONS"}
                 sectionSubtitle={"FROM 2003 T0 2022"}
                 longSection={false}>
-                    <CatalogGrid itemsList={seasons} itemField={"year"} cardImagePathRoot={"TeamCard/"} cardImageExt={".png"}/>
+                    <CatalogGrid 
+                        itemsList={seasons} 
+                        itemField={"year"} 
+                        cardImagePathRoot={""} 
+                        cardImageExt={".png"}
+                        to={"/seasons/profile"}
+                    />
             </PageTemplate>
         </div>
     )

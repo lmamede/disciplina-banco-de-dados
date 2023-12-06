@@ -4,9 +4,8 @@ const apiRoot = "http://localhost:8080/api/nba/"
 
 export const useFetch = (url) => {
     const [request, setRequest] = useState(null)
-    const [method, setMethod] = useState(null)
     const [data, setData] = useState(null)
-    const [pathParam, setPathParam] = useState("")
+    var api = "";
 
     const buildRequest = (param, method) => {
         if(method === "POST") {
@@ -17,23 +16,22 @@ export const useFetch = (url) => {
                 },
                 body: JSON.stringify(param),
             })
+            api = apiRoot + url
         } else if (method === "GET" && param){
-            console.log(method + " - " + param)
-            setPathParam(param)
+            api= apiRoot + url + "/" + param
+        }else{
+            api = apiRoot + url
         }
     };
 
     
     useEffect(() => {
-        var api = apiRoot + url
         const fetchData = async () => {
             try{
-                if(method === "GET") api+="/"+pathParam
                 let fetchOptions = [api, request]
                 const res = await fetch(...fetchOptions)
                 const json = await res.json()
                 setData(json)
-                setMethod(null)
             } catch (error) {
                 console.log(error.message)
             }
@@ -41,7 +39,7 @@ export const useFetch = (url) => {
 
         fetchData()
 
-    },[url, pathParam, request, method])
+    },[api, request])
 
     return {data, buildRequest};
 }
