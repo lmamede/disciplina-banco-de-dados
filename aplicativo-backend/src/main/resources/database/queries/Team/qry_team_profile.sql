@@ -15,7 +15,7 @@ FROM (
              sum(WinningGames) AS TotalWinningGames,
              sum(LoosingGames) AS TotalLoosingGames,
              sum(GamesPlayed) AS TotalGamesPlayed,
-             CONCAT(FORMAT(sum(WinningGames) / sum(GamesPlayed) * 100,1), '%') AS TotalWinsPercentage,
+             FORMAT(sum(WinningGames) / sum(GamesPlayed) * 100,1) AS TotalWinsPercentage,
              TeamID
          FROM (
                   SELECT
@@ -34,7 +34,7 @@ FROM (
          NATURAL JOIN (
             SELECT
                 t1.Nickname as TeamNickname,
-                CONCAT(FORMAT(avg(Win) * 100,1), '%') as HomeWinsPercentage,
+                FORMAT(avg(Win) * 100,1) as HomeWinsPercentage,
                 t1.ID as Team_ID
     FROM Team AS t1
              INNER JOIN Game ON t1.ID = fk_Team_ID_Home

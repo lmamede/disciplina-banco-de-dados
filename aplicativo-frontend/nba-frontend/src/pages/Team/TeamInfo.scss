@@ -1,0 +1,29 @@
+.team-profile {
+    width: 25vw;
+    margin: 3vw 3vw 3vw 0vw;
+    padding: 4vw 4vw 6vw 4vw;
+    background-color: #D2D3E4;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.team-profile h1 {
+    color: #777;
+    font-weight: bold;
+    font-size: 1.8vw;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+}
+
+.team-profile label {
+    display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-weight: lighter;
+    margin-top: 1.5vw;
+    font-size: 1.2vw;
+}
+
+.team-profile p {
+    color: #666;
+    font-weight: bold;
+}

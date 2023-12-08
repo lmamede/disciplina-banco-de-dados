@@ -1,26 +1,30 @@
 import {useState, useEffect} from 'react'
 
-const apiRoot = "http://localhost:6868/api/nba/"
+const apiRoot = "http://localhost:8080/api/nba/"
 
 export const useFetch = (url) => {
     const [request, setRequest] = useState(null)
     const [data, setData] = useState(null)
-    var api = "";
+    const [api, setApi] = useState(apiRoot + url)
 
     const buildRequest = (param, method) => {
         if(method === "POST") {
             setRequest({
-                method, 
+                method: method, 
                 headers: {
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify(param),
             })
-            api = apiRoot + url
         } else if (method === "GET" && param){
-            api= apiRoot + url + "/" + param
-        }else{
-            api = apiRoot + url
+            setApi(api + "/" + param)
+            setRequest({
+                method:method
+            })
+        } else {
+            setRequest({
+                method:method
+            })
         }
     };
 
@@ -28,10 +32,13 @@ export const useFetch = (url) => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                let fetchOptions = [api, request]
-                const res = await fetch(...fetchOptions)
-                const json = await res.json()
-                setData(json)
+                if(request && request.method){
+                    console.log(api, request)
+                    let fetchOptions = [api, request]
+                    const res = await fetch(...fetchOptions)
+                    const json = await res.json()
+                    setData(json)
+                }
             } catch (error) {
                 console.log(error.message)
             }

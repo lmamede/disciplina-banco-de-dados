@@ -1,9 +1,9 @@
 import {React, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
-const CatalogCard = ({itemInfo, index, cardImagePathRoot, cardImageExt, to}) => {
-    const [textFormat, setTextFormat] = useState(itemInfo)
-    const itemImage = cardImagePathRoot + itemInfo.replaceAll(" ", '_').toLowerCase() + cardImageExt
+const CatalogCard = ({itemInfo, itemField, index, cardImagePathRoot, cardImageExt, to}) => {
+    const [textFormat, setTextFormat] = useState(String(itemInfo[itemField]))
+    const itemImage = cardImagePathRoot + String(itemInfo[itemField]).replaceAll(" ", '_').toLowerCase() + cardImageExt
 
     useEffect(() => {
       return () => {

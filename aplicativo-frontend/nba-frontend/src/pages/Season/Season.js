@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useEffect} from 'react'
 import { useFetch } from '../../hooks/useFetch'
 import CatalogGrid from '../../components/Catalog/CatalogGrid'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
@@ -7,7 +7,10 @@ const url = "seasons"
 
 const Season = () => {
     const {data: seasons, buildRequest} = useFetch(url)
-    buildRequest("", "GET")
+
+    useEffect(() => {
+        buildRequest("", "GET")
+    }, [])
 
     return (
         <div>

@@ -1,0 +1,33 @@
+.second-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vw 0;
+    border-radius: 2vw;
+    box-shadow:0 1vw 5vw rgba(0, 0, 0, 0.4);
+}
+
+.team-stats {
+    height: 25vw;
+}
+
+.third-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2vw;
+    box-shadow:0 1vw 5vw rgba(0, 0, 0, 0.4);
+    margin: 5vw 0;
+}
+
+.adversaries-stats{
+    height: 30vw;
+    width: 49vw;
+}
+
+.games-list-container {
+    height: 30vw;
+    width: 24vw;
+}

@@ -3,8 +3,8 @@ import React from 'react'
 import { VictoryPie } from 'victory'
 
 const VictoryStats = ({data}) => {
-    const homeWin = data[0].homeWinPercentage
-    const awayWin = data[0].awayWinPercentage
+    const homeWin = data? data[0].homeWinPercentage : ''
+    const awayWin = data? data[0].awayWinPercentage : ''
     return (
         <div className='victory-chart'>
             <div className="chart-title">

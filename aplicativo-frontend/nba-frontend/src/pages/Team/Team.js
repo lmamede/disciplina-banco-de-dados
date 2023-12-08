@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { useFetch } from '../../hooks/useFetch'
 import CatalogGrid from '../../components/Catalog/CatalogGrid'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
@@ -7,7 +7,10 @@ const url = "teams"
 
 const Team = () => {
     const {data: teams, buildRequest} = useFetch(url)
-    buildRequest("", "GET")
+
+    useEffect(() => {
+        buildRequest("", "GET")
+    }, [])
 
     return (
         <div>
@@ -16,7 +19,13 @@ const Team = () => {
                 sectionTitle={"TEAMS"}
                 sectionSubtitle={"MEET THE CHAMPIONS"}
                 longSection={false}>
-                    <CatalogGrid itemsList={teams} itemField={"nickname"} cardImagePathRoot={"TeamCard/"} cardImageExt={".png"}/>
+                    <CatalogGrid 
+                        itemsList={teams} 
+                        itemField={"nickname"} 
+                        cardImagePathRoot={"TeamCard/"} 
+                        cardImageExt={".png"}
+                        to={"/teams/profile"}
+                    />
             </PageTemplate>            
         </div>
     )

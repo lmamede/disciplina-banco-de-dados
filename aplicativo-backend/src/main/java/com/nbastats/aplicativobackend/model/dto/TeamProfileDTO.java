@@ -13,6 +13,6 @@ public class TeamProfileDTO {
     private int totalWinningGames;
     private int totalLoosingGames;
     private int totalGamesPlayed;
-    private String totalWinsPercentage;
-    private String homeWinsPercentage;
+    private double totalWinsPercentage;
+    private double homeWinsPercentage;
 }

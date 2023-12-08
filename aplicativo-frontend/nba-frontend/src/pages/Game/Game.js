@@ -1,62 +1,41 @@
-import React from 'react'
+import { React, useEffect, useState } from 'react'
 import PageTemplate from '../../components/PageTemplate/PageTemplate'
-import GameList from './GamePageList.js'
+import GamePageList from './GamePageList.js'
+import { useFetch } from '../../hooks/useFetch'
+
+const urlGames='games'
+const urlSeasons='seasons'
+const urlTeams='teams'
 
 const Game = () => {
+    const [seasonController, setSeasonController] = useState('');
+    const [teamController, setTeamController] = useState('');
 
-    const games = [
-        {
-            "id": 11900044,
-            "date": "2019-10-12",
-            "status": "Final",
-            "season": 2019,
-            "pointsHome": 91,
-            "pointsAway": 77,
-            "teamHome": "Nets",
-            "teamAway": "Lakers"
-        },
-        {
-            "id": 11900075,
-            "date": "2019-10-18",
-            "status": "Final",
-            "season": 2019,
-            "pointsHome": 107,
-            "pointsAway": 123,
-            "teamHome": "Nets",
-            "teamAway": "Raptors"
-        },
-        {
-            "id": 11900103,
-            "date": "2020-07-22",
-            "status": "Final",
-            "season": 2020,
-            "pointsHome": 68,
-            "pointsAway": 99,
-            "teamHome": "Nets",
-            "teamAway": "Pelicans"
-        }
-    ]
+    const {data: games, buildRequest: requestGames} = useFetch(urlGames)
+    const {data: seasons, buildRequest: requestSeasons} = useFetch(urlSeasons)
+    const {data: teams, buildRequest: requestTeams} = useFetch(urlTeams)
+    
 
-    const [seasonController, setSeasonController] = React.useState('Seasons');
+    useEffect(() => {
+        requestSeasons("", "GET")
+        requestTeams("", "GET")
+        requestGames({season : 2022, team_nickname: ""}, "POST")
+    }, [])
+    
+
 
     const handleSeasonChange = (event) => {
         setSeasonController(event.target.value);
     }
 
-    const [teamController, setTeamController] = React.useState('Teams');
-
     const handleTeamChange = (event) => {
         setTeamController(event.target.value);
     }
 
-    var seasons = new Set();
-    var teams = new Set();
+    const handleChange = () => {
+        requestGames({season : seasonController, team_nickname: teamController}, "POST")
+    }
 
-    games.map((game, i) => (
-        seasons.add(game.season),
-        teams.add(game.teamHome),
-        teams.add(game.teamAway)
-    ))
 
     return (
         <div>
@@ -68,22 +47,20 @@ const Game = () => {
                 <div className="game-page">
                     <div className="dropdown-selections">
                         <select value = {seasonController} onChange = {handleSeasonChange}>
-                            <option value = 'Seasons'>Seasons</option>
-                            {seasons && Array.from(seasons).map((season, i) => (
-                                <option value={season}>{season}</option>
+                            <option value = "">Seasons</option>
+                            {seasons && seasons.map((season, i) => (
+                                <option value={season.year} key={i}>{season.year}</option>
                             ))}
                         </select>
                         <select value = {teamController} onChange = {handleTeamChange}>
-                            <option value = 'Teams'>Teams</option>
-                            {teams && Array.from(teams).map((team, i) => (
-                                <option value={team}>{team}</option>
+                            <option value = "">Teams</option>
+                            {teams && teams.map((team, i) => (
+                                <option value={team.nickname} key={i}>{team.nickname}</option>
                             ))}
                         </select>
+                        <button onClick={handleChange}> Confirm</button>
                     </div>
-                    <GameList games={seasonController == 'Seasons' ? 
-                        (teamController == 'Teams' ? games : games.filter((game) => game.teamAway == teamController || game.teamHome == teamController))
-                         : (teamController == 'Teams' ? games : games.filter((game) => (game.teamAway == teamController || game.teamHome == teamController) && game.season == seasonController))
-                         } imgRoot={"/TeamCard/"}></GameList>
+                    <GamePageList games={games} imgRoot={"/TeamCard/"} to={"/games/profile"}></GamePageList>
                 </div>  
             </PageTemplate>
         </div>

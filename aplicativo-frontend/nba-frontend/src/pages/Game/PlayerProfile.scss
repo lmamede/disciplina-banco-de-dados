@@ -1,0 +1,50 @@
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.modal-content {
+    width: 45vw;
+    height: 27vw;
+    background-color: #E2E3F4;
+    display: flex;
+    border: none;
+}
+
+.modal-content img {
+    width: 20vw;
+    padding: 2vw;
+    background-color: #E2E3F4;
+}
+
+.modal-content .arena-profile {
+    width: 20vw;
+    margin: 2vw 2vw 2vw 0vw;
+    padding: 0 2vw;
+    background-color: #D2D3E4;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.modal-content .arena-profile h1 {
+    color: #777;
+    font-weight: bold;
+    font-size: 1.5vw;
+    margin-top: 2vw;
+    margin-bottom: 3vw;
+}
+
+.modal-content .arena-profile label {
+    display: flex;
+    justify-content: space-between;
+    color: #777;
+    font-weight: lighter;
+    margin-top: 2vw;
+    font-size: 1.1vw;
+}
+
+.modal-content .arena-profile p {
+    color: #666;
+    font-weight: bold;
+}
